@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="app_name">Material RSS</string>
+  <string name="title_feed_detail">Feed Detail</string>
+  <!--string name="feed_url">http://feeds.bbci.co.uk/news/rss.xml</string-->
+  <string name="feed_url">http://blog.stylingandroid.com/feed/</string>
+
+</resources>
