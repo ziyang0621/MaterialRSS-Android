@@ -37,9 +37,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         private final TextView date;
 
         public static ViewHolder newInstance(View parent) {
-            TextView title = (TextView)parent.findViewById(R.id.feed_item_title);
-            TextView description = (TextView)parent.findViewById(R.id.feed_item_description);
-            TextView date = (TextView)parent.findViewById(R.id.feed_item_date);
+            TextView title = (TextView) parent.findViewById(R.id.feed_item_title);
+            TextView description = (TextView) parent.findViewById(R.id.feed_item_description);
+            TextView date = (TextView) parent.findViewById(R.id.feed_item_date);
             return new ViewHolder(parent, title, description, date);
         }
 
@@ -63,8 +63,21 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             date.setText(text);
         }
 
+
         public void setOnClickListener(View.OnClickListener listener) {
             parent.setOnClickListener(listener);
+        }
+
+        public View getTitleView() {
+            return title;
+        }
+
+        public View getDateView() {
+            return date;
+        }
+
+        public View getBodyView() {
+            return description;
         }
     }
 
@@ -87,7 +100,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
                 itemClickListener.itemClicked(item);
             }
         });
-     }
+    }
 
     @Override
     public int getItemCount() {

@@ -3,6 +3,8 @@ package com.stylingandroid.materialrss;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.ViewCompat;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.TextView;
@@ -37,6 +39,9 @@ public class FeedDetailActivity extends Activity {
         TextView title = (TextView) findViewById(R.id.feed_detail_title);
         TextView date = (TextView) findViewById(R.id.feed_detail_date);
         WebView webView = (WebView) findViewById(R.id.feed_detail_body);
+        ViewCompat.setTransitionName(title, getString(R.string.transition_title));
+        ViewCompat.setTransitionName(date, getString(R.string.transition_date));
+        ViewCompat.setTransitionName(webView, getString(R.string.transition_body));
 
         title.setText(item.getTitle());
         date.setText(dateFormat.format(new Date(item.getPubDate())));
@@ -50,7 +55,7 @@ public class FeedDetailActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         int id = menuItem.getItemId();
         if (id == android.R.id.home) {
-            finish();
+            ActivityCompat.finishAfterTransition(this);
             return true;
         }
         return super.onOptionsItemSelected(menuItem);

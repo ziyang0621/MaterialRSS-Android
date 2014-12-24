@@ -4,9 +4,13 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -56,6 +60,15 @@ public class FeedListActivity extends ActionBarActivity implements FeedConsumer,
     public void itemClicked(Item item) {
         Intent detailIntent = new Intent(FeedListActivity.this, FeedDetailActivity.class);
         detailIntent.putExtra(FeedDetailActivity.ARG_ITEM, item);
-        startActivity(detailIntent);
+        FeedAdapter.ViewHolder viewHolder = (FeedAdapter.ViewHolder) recyclerView.findViewHolderForItemId(item.getPubDate());
+        String titleName = getString(R.string.transition_title);
+        String dateName = getString(R.string.transition_date);
+        String bodyName = getString(R.string.transition_body);
+        Pair<View, String> titlePair = Pair.create(viewHolder.getTitleView(), titleName);
+        Pair<View, String> datePair = Pair.create(viewHolder.getDateView(), dateName);
+        Pair<View, String> bodyPair = Pair.create(viewHolder.getBodyView(), bodyName);
+        @SuppressWarnings("unchecked")
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, titlePair, datePair, bodyPair);
+        ActivityCompat.startActivity(this, detailIntent, options.toBundle());
     }
 }

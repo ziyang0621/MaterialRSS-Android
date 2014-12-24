@@ -6,4 +6,7 @@
   <!--string name="feed_url">http://feeds.bbci.co.uk/news/rss.xml</string-->
   <string name="feed_url">http://blog.stylingandroid.com/feed/</string>
 
+    <string name="transition_title">com.stylingandroid.materialrss.transition.TITLE</string>
+    <string name="transition_date">com.stylingandroid.materialrss.transition.DATE</string>
+    <string name="transition_body">com.stylingandroid.materialrss.transition.BODY</string>
 </resources>
