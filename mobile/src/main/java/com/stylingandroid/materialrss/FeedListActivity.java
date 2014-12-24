@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.stylingandroid.materialrss.adapter.FeedAdapter;
@@ -17,9 +17,6 @@ import com.stylingandroid.materialrss.rss.model.Item;
 public class FeedListActivity extends ActionBarActivity implements FeedConsumer, FeedAdapter.ItemClickListener {
     private static final String DATA_FRAGMENT_TAG = DataFragment.class.getCanonicalName();
 
-    private ListView listView;
-    private FeedAdapter adapter;
-
     private RecyclerView recyclerView;
 
     @Override
@@ -27,13 +24,12 @@ public class FeedListActivity extends ActionBarActivity implements FeedConsumer,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feed_list);
 
-//        listView = (ListView)findViewById(android.R.id.list);
-//        listView.setOnItemClickListener(new ItemClickListener());
-
         recyclerView = (RecyclerView) findViewById(R.id.list);
+        ImageView overlay = (ImageView)findViewById(R.id.overlay);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addOnItemTouchListener(new DragController(recyclerView, overlay));
 
         DataFragment dataFragment = (DataFragment) getFragmentManager().findFragmentByTag(DATA_FRAGMENT_TAG);
         if (dataFragment == null) {
@@ -62,15 +58,4 @@ public class FeedListActivity extends ActionBarActivity implements FeedConsumer,
         detailIntent.putExtra(FeedDetailActivity.ARG_ITEM, item);
         startActivity(detailIntent);
     }
-
-//    private class ItemClickListener implements AdapterView.OnItemClickListener {
-//
-//        @Override
-//        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            Intent detailIntent = new Intent(FeedListActivity.this, FeedDetailActivity.class);
-//            Item item = adapter.getItem(position);
-//            detailIntent.putExtra(FeedDetailActivity.ARG_ITEM, item);
-//            startActivity(detailIntent);
-//        }
-//    }
 }
